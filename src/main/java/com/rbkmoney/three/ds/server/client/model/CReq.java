@@ -3,7 +3,12 @@ package com.rbkmoney.three.ds.server.client.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.rbkmoney.threeds.server.domain.message.MessageExtension;
 import com.rbkmoney.threeds.server.domain.message.MessageType;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -47,7 +52,7 @@ public class CReq {
     private String challengeNoEntry;
 
     @ToString.Include
-    private MessageExtension messageExtension;
+    private List<MessageExtension> messageExtension;
 
     @ToString.Include
     private String oobContinue;
