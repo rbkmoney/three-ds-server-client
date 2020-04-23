@@ -1,6 +1,7 @@
 package com.rbkmoney.three.ds.server.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.rbkmoney.threeds.server.domain.message.MessageExtension;
 import com.rbkmoney.threeds.server.domain.message.MessageType;
 import lombok.Builder;
 import lombok.Data;
@@ -24,11 +25,44 @@ public class CReq {
     @ToString.Include
     private String messageVersion;
 
-    // Optional
+    @ToString.Include
+    private String challengeWindowSize;
+
+    // Optional fields
     @ToString.Include
     private String threeDSSessionData;
 
     @ToString.Include
-    private String challengeWindowSize;
+    private String threeDSRequestorAppURL;
+
+    @ToString.Include
+    private String challengeCancel;
+
+    @ToString.Include
+    private String challengeDataEntry;
+
+    @ToString.Include
+    private String challengeHTMLDataEntry;
+
+    @ToString.Include
+    private String challengeNoEntry;
+
+    @ToString.Include
+    private MessageExtension messageExtension;
+
+    @ToString.Include
+    private String oobContinue;
+
+    @ToString.Include
+    private String resendChallenge;
+
+    @ToString.Include
+    private String sdkTransID;
+
+    @ToString.Include
+    private String sdkCounterStoA;
+
+    @ToString.Include
+    private String whitelistingDataEntry;
 
 }
