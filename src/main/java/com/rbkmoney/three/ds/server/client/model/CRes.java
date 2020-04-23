@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.rbkmoney.threeds.server.domain.message.MessageExtension;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -64,7 +66,7 @@ public class CRes {
     private String issuerImage;
 
     @ToString.Include
-    private MessageExtension messageExtension;
+    private List<MessageExtension> messageExtension;
 
     @ToString.Include
     private String oobAppURL;

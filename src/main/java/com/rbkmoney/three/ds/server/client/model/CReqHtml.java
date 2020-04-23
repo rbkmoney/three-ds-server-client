@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.rbkmoney.threeds.server.domain.message.MessageExtension;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -37,6 +39,6 @@ public class CReqHtml {
     private String transStatus;
 
     @ToString.Include
-    private MessageExtension messageExtension;
+    private List<MessageExtension> messageExtension;
 
 }
