@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_ABSENT)
 @ToString(onlyExplicitlyIncluded = true)
-public class HtmlCReq {
+public class CReqHtml {
 
     @ToString.Include
     private String messageType;
