@@ -5,10 +5,12 @@ import com.rbkmoney.threeds.server.domain.message.MessageExtension;
 import com.rbkmoney.threeds.server.domain.message.MessageType;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
 @Builder
+@NoArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_ABSENT)
 @ToString(onlyExplicitlyIncluded = true)
 public class CReq {
