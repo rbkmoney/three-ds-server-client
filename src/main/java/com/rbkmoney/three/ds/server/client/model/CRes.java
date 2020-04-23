@@ -1,6 +1,7 @@
 package com.rbkmoney.three.ds.server.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.rbkmoney.threeds.server.domain.message.MessageExtension;
 import lombok.*;
 
 @Data
@@ -63,7 +64,7 @@ public class CRes {
     private String issuerImage;
 
     @ToString.Include
-    private String messageExtension;
+    private MessageExtension messageExtension;
 
     @ToString.Include
     private String oobAppURL;
