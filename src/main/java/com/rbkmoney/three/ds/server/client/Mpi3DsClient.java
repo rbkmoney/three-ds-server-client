@@ -12,6 +12,7 @@ import com.rbkmoney.three.ds.server.client.exception.Mpi3DsClientException;
 import com.rbkmoney.three.ds.server.client.utils.generate.GenerateUtils;
 import com.rbkmoney.three.ds.server.client.validator.Mpi3DsClientValidator;
 import com.rbkmoney.threeds.server.domain.BrowserColorDepth;
+import com.rbkmoney.threeds.server.domain.Valuable;
 import com.rbkmoney.threeds.server.domain.device.DeviceChannel;
 import com.rbkmoney.threeds.server.domain.message.MessageCategory;
 import com.rbkmoney.threeds.server.domain.root.Message;
@@ -130,20 +131,10 @@ public class Mpi3DsClient {
         PArq pArq = new PArq();
 //        // TODO: expect a protocol change to get the structure Browser
         pArq.setMessageVersion("2.1.0");
-
-        EnumWrapper<MessageCategory> messageCategoryEnumWrapper = new EnumWrapper<>();
-        messageCategoryEnumWrapper.setValue(MessageCategory.PAYMENT_AUTH);
-        pArq.setMessageCategory(messageCategoryEnumWrapper);
-
+        pArq.setMessageCategory(prepareEnumWrapper(MessageCategory.PAYMENT_AUTH));
         pArq.setCardholderName(cardData.getCardholderName());
-
-        EnumWrapper<DeviceChannel> deviceChannelEnumWrapper = new EnumWrapper<>();
-        deviceChannelEnumWrapper.setValue(DeviceChannel.BROWSER);
-        pArq.setDeviceChannel(deviceChannelEnumWrapper);
-
-        EnumWrapper<ThreeDsMethodCompletionIndicator> threeDsMethodCompletionIndicatorEnumWrapper = new EnumWrapper<>();
-        threeDsMethodCompletionIndicatorEnumWrapper.setValue(ThreeDsMethodCompletionIndicator.SUCCESSFULLY_COMPLETED);
-        pArq.setThreeDSCompInd(threeDsMethodCompletionIndicatorEnumWrapper);
+        pArq.setDeviceChannel(prepareEnumWrapper(DeviceChannel.BROWSER));
+        pArq.setThreeDSCompInd(prepareEnumWrapper(ThreeDsMethodCompletionIndicator.SUCCESSFULLY_COMPLETED));
 
         pArq.setThreeDSRequestorID(threeDSRequestorID);
 
@@ -155,9 +146,7 @@ public class Mpi3DsClient {
         pArq.setBrowserJavascriptEnabled(true);
         pArq.setBrowserLanguage("ru-RU");
 
-        EnumWrapper<BrowserColorDepth> browserColorDepthEnumWrapper = new EnumWrapper<>();
-        browserColorDepthEnumWrapper.setValue(BrowserColorDepth.BITS_32);
-        pArq.setBrowserColorDepth(browserColorDepthEnumWrapper);
+        pArq.setBrowserColorDepth(prepareEnumWrapper(BrowserColorDepth.BITS_32));
 
         pArq.setBrowserScreenHeight("1920");
         pArq.setBrowserScreenWidth("1080");
@@ -167,10 +156,7 @@ public class Mpi3DsClient {
         pArq.setAcctID(cardData.getPan());
         pArq.setNotificationURL(notificationUrl);
 
-        EnumWrapper<ThreeDSRequestorAuthenticationInd> threeDSRequestorAuthenticationIndEnumWrapper = new EnumWrapper<>();
-        threeDSRequestorAuthenticationIndEnumWrapper.setValue(threeDSRequestorAuthenticationInd);
-        pArq.setThreeDSRequestorAuthenticationInd(threeDSRequestorAuthenticationIndEnumWrapper);
-
+        pArq.setThreeDSRequestorAuthenticationInd(prepareEnumWrapper(threeDSRequestorAuthenticationInd));
         return pArq;
     }
 
@@ -220,5 +206,11 @@ public class Mpi3DsClient {
 
     private ThreeDSRequestorAuthenticationInd prepareThreeDSRequestorAuthenticationInd(RecurrentTokenContext context) {
         return ThreeDSRequestorAuthenticationInd.PAYMENT_TRANSACTION;
+    }
+
+    private static <T extends Valuable> EnumWrapper<T> prepareEnumWrapper(T eEnum) {
+        EnumWrapper<T> enumWrapper = new EnumWrapper<>();
+        enumWrapper.setValue(eEnum);
+        return enumWrapper;
     }
 }
