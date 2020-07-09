@@ -83,7 +83,7 @@ public class Mpi3DsClient {
         return send(Method.AUTHENTICATION, areq, ARes.class);
     }
 
-    public ARes authenticationARes(PaymentContext context, CardDataProxyModel cardData, String notificationUrl) {
+    public ARes authenticationAReq(PaymentContext context, CardDataProxyModel cardData, String notificationUrl) {
         Map<String, String> options = context.getOptions();
         Mpi3DsClientValidator validator = new Mpi3DsClientValidator();
         validator.validate(options);
@@ -94,7 +94,7 @@ public class Mpi3DsClient {
         return authentication(aReq);
     }
 
-    public ARes authenticationARes(RecurrentTokenContext context, CardDataProxyModel cardData, String notificationUrl) {
+    public ARes authenticationAReq(RecurrentTokenContext context, CardDataProxyModel cardData, String notificationUrl) {
         Map<String, String> options = context.getOptions();
         Mpi3DsClientValidator validator = new Mpi3DsClientValidator();
         validator.validate(options);
