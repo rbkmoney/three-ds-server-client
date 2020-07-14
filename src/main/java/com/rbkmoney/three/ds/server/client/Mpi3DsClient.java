@@ -73,7 +73,7 @@ public class Mpi3DsClient {
         return authentication(request);
     }
 
-    private <T> T send(Method method, Request request, Class<T> response) {
+    private <T> T send(Method method, AuthenticationRequest request, Class<T> response) {
         log.info("{}. Send request message to DS: request={}", method.getValue(), request);
         try {
             HttpHeaders headers = prepareHttpHeaders();

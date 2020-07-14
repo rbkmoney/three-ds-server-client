@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_ABSENT)
 @ToString(onlyExplicitlyIncluded = true)
-public class AuthenticationRequest implements Request {
+public class AuthenticationRequest {
 
     @JsonUnwrapped(prefix = "message")
     private MessageData message;
@@ -91,9 +91,6 @@ public class AuthenticationRequest implements Request {
 
     @JsonUnwrapped(prefix = "recurring")
     private Recurring recurring;
-
-    @JsonUnwrapped(prefix = "sdk")
-    private Sdk sdk;
 
     @JsonProperty("transType")
     private TransactionType transactionType;

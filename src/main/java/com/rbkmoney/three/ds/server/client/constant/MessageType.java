@@ -32,8 +32,7 @@ public enum MessageType implements Valuable {
     CHALLENGE_REQUEST_MESSAGE("CReq"),
     CHALLENGE_RESPONSE_MESSAGE("CRes"),
 
-    ERROR_RESPONSE("Erro"),
-    ERROR_MESSAGE("Error Message");
+    ERROR_RESPONSE("Erro");
 
     private final String value;
 
