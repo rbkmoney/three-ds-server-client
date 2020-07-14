@@ -13,8 +13,9 @@ import com.rbkmoney.threeds.server.domain.transaction.TransactionStatus;
 import com.rbkmoney.threeds.server.domain.transaction.TransactionStatusReason;
 import com.rbkmoney.threeds.server.domain.whitelist.WhiteListStatus;
 import com.rbkmoney.threeds.server.domain.whitelist.WhiteListStatusSource;
-import com.rbkmoney.threeds.server.serialization.ListWrapper;
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -56,7 +57,7 @@ public class AuthenticationResponse {
     private AuthenticationType authenticationType;
 
     @JsonDeserialize(using = com.rbkmoney.three.ds.server.client.utils.deserializer.MessageExtensionDeserializer.class)
-    private ListWrapper<MessageExtension> messageExtension;
+    private List<MessageExtension> messageExtension;
 
     @JsonDeserialize(using = com.rbkmoney.three.ds.server.client.utils.deserializer.TransactionStatusDeserializer.class)
     private TransactionStatus transStatus;
