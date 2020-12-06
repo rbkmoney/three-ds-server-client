@@ -100,11 +100,15 @@ public class ThreeDsClient {
             String threeDsServerTransId,
             CardDataProxyModel cardDataProxyModel,
             String dsEndProtocolVersion) {
-        String url = properties.getSdkUrl();
-        String endpoint = "POST " + url;
-
         var rbkMoneyAuthenticationRequest = rbkMoneyAuthenticationRequest(
                 threeDsMethodCompletionInd, context, threeDsServerTransId, cardDataProxyModel, dsEndProtocolVersion);
+
+        return emvcoAuthentication(rbkMoneyAuthenticationRequest);
+    }
+
+    public Optional<Message> emvcoAuthentication(RBKMoneyAuthenticationRequest rbkMoneyAuthenticationRequest) {
+        String url = properties.getSdkUrl();
+        String endpoint = "POST " + url;
 
         log.info(REQUEST_LOG, endpoint, rbkMoneyAuthenticationRequest.toString());
 
