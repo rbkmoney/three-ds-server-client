@@ -67,7 +67,7 @@ public class ThreeDsClient {
 
         String urlWithRequestParameters = String.format("%s?%s=%s", url, ACCOUNT_NUMBER_PARAM_NAME, pan);
 
-        Optional<ThreeDsVersion> response = Optional.ofNullable(
+        var response = Optional.ofNullable(
                 restTemplate.getForObject(urlWithRequestParameters, ThreeDsVersion.class));
 
         log.info(RESPONSE_LOG, endpoint, response.toString());
@@ -82,11 +82,11 @@ public class ThreeDsClient {
         String url = properties.getThreeDsMethodUrl();
         String endpoint = "POST " + url;
 
-        ThreeDsMethodRequest request = threeDsMethodRequest(threeDsServerTransId, threeDsMethodNotificationUrl, threeDsMethodUrl);
+        var request = threeDsMethodRequest(threeDsServerTransId, threeDsMethodNotificationUrl, threeDsMethodUrl);
 
         log.info(REQUEST_LOG, endpoint, request.toString());
 
-        Optional<ThreeDsMethodResponse> response = Optional.ofNullable(
+        var response = Optional.ofNullable(
                 restTemplate.postForObject(url, request, ThreeDsMethodResponse.class));
 
         log.info(RESPONSE_LOG, endpoint, response.toString());
@@ -94,7 +94,7 @@ public class ThreeDsClient {
         return response;
     }
 
-    private Optional<Message> emvcoAuthentication(
+    public Optional<Message> emvcoAuthentication(
             ThreeDsMethodCompletionInd threeDsMethodCompletionInd,
             PaymentContext context,
             String threeDsServerTransId,
@@ -103,12 +103,12 @@ public class ThreeDsClient {
         String url = properties.getSdkUrl();
         String endpoint = "POST " + url;
 
-        RBKMoneyAuthenticationRequest rbkMoneyAuthenticationRequest = rbkMoneyAuthenticationRequest(
+        var rbkMoneyAuthenticationRequest = rbkMoneyAuthenticationRequest(
                 threeDsMethodCompletionInd, context, threeDsServerTransId, cardDataProxyModel, dsEndProtocolVersion);
 
         log.info(REQUEST_LOG, endpoint, rbkMoneyAuthenticationRequest.toString());
 
-        Optional<Message> response = Optional.ofNullable(
+        var response = Optional.ofNullable(
                 restTemplate.postForObject(url, rbkMoneyAuthenticationRequest, Message.class));
 
         log.info(RESPONSE_LOG, endpoint, response.toString());
@@ -122,7 +122,7 @@ public class ThreeDsClient {
             String threeDsServerTransId,
             CardDataProxyModel cardDataProxyModel,
             String dsEndProtocolVersion) {
-        RBKMoneyAuthenticationRequest rbkMoneyAuthenticationRequest = RBKMoneyAuthenticationRequest.builder()
+        var request = RBKMoneyAuthenticationRequest.builder()
                 .threeDSCompInd(wrapEnum(threeDsMethodCompletionInd))
                 .threeDSRequestorAuthenticationInd(wrapEnum(prepareThreeDSRequestorAuthenticationInd(context))) //todo
                 .threeDSRequestorAuthenticationInfo(getThreeDSRequestorAuthenticationInfo()) //todo
@@ -179,8 +179,8 @@ public class ThreeDsClient {
                 .whiteListStatus(wrapEnum(WhiteListStatus.WHITELISTED)) //todo mb null
                 .whiteListStatusSource(wrapEnum(WhiteListStatusSource.THREE_DS_SERVER)) //todo mb null
                 .build();
-        rbkMoneyAuthenticationRequest.setMessageVersion(dsEndProtocolVersion);
-        return rbkMoneyAuthenticationRequest;
+        request.setMessageVersion(dsEndProtocolVersion);
+        return request;
     }
 
     private ThreeDSRequestorAuthenticationInd prepareThreeDSRequestorAuthenticationInd(PaymentContext context) {
@@ -193,7 +193,7 @@ public class ThreeDsClient {
     }
 
     private ThreeDSRequestorAuthenticationInfoWrapper getThreeDSRequestorAuthenticationInfo() {
-        ThreeDSRequestorAuthenticationInfoWrapper wrapper = new ThreeDSRequestorAuthenticationInfoWrapper();
+        var wrapper = new ThreeDSRequestorAuthenticationInfoWrapper();
         wrapper.setThreeDSReqAuthData("rtkrcxbcdg"); //todo
         wrapper.setThreeDSReqAuthMethod(wrapEnum(ThreeDSReqAuthMethod.FEDERATED_ID)); //todo
         wrapper.setThreeDSReqAuthTimestamp(wrapTime(LocalDateTime.now())); //todo
@@ -201,7 +201,7 @@ public class ThreeDsClient {
     }
 
     private ThreeDSRequestorPriorAuthenticationInfoWrapper getThreeDSRequestorPriorAuthenticationInfo() {
-        ThreeDSRequestorPriorAuthenticationInfoWrapper wrapper = new ThreeDSRequestorPriorAuthenticationInfoWrapper();
+        var wrapper = new ThreeDSRequestorPriorAuthenticationInfoWrapper();
         wrapper.setThreeDSReqPriorRef("eeb3ff4a-a248-48d8-b4cd-e52046bc7fbc"); //todo
         wrapper.setThreeDSReqPriorAuthTimestamp(wrapTime(LocalDateTime.now())); //todo
         wrapper.setThreeDSReqPriorAuthMethod(wrapEnum(ThreeDSReqPriorAuthMethod.OTHER_METHODS)); //todo
@@ -220,7 +220,7 @@ public class ThreeDsClient {
     }
 
     private AccountInfoWrapper getAcctInfo() {
-        AccountInfoWrapper wrapper = new AccountInfoWrapper();
+        var wrapper = new AccountInfoWrapper();
         wrapper.setChAccDate(wrapTime(LocalDate.now())); //todo
         wrapper.setShipAddressUsageInd(wrapEnum(ShipAddressUsageInd.FROM_30_TO_60_DAYS)); //todo
         wrapper.setTxnActivityYear("1"); //todo
@@ -260,7 +260,7 @@ public class ThreeDsClient {
     }
 
     private MerchantRiskIndicatorWrapper getMerchantRiskIndicator() {
-        MerchantRiskIndicatorWrapper wrapper = new MerchantRiskIndicatorWrapper();
+        var wrapper = new MerchantRiskIndicatorWrapper();
         wrapper.setDeliveryTimeframe(wrapEnum(DeliveryTimeframe.ELECTRONIC_DELIVERY)); //todo
         wrapper.setDeliveryEmailAddress("support@rbk.money"); //todo
         wrapper.setGiftCardCurr("744"); //todo
