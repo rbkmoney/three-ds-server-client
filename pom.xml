@@ -20,14 +20,6 @@
 
     <developers>
         <developer>
-            <name>Anatoly Cherkasov</name>
-            <email>a.cherkasov@rbkmoney.com</email>
-            <organization>RBK.money</organization>
-            <organizationUrl>https://rbk.money</organizationUrl>
-        </developer>
-        <developer>
-            <name>Anatolii Karlov</name>
-            <email>a.karlov@rbkmoney.com</email>
             <organization>RBK.money</organization>
             <organizationUrl>https://rbk.money</organizationUrl>
         </developer>
