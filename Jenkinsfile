@@ -3,6 +3,8 @@ build('three-ds-server-client', 'docker-host') {
     checkoutRepo()
     loadBuildUtils()
 
+    env.JAVA_HOME = sh(returnStdout: true, script: 'java-config --select-vm openjdk-bin-11 --jdk-home').trim()
+
     def javaLibPipeline
     runStage('load JavaLib pipeline') {
         javaLibPipeline = load("build_utils/jenkins_lib/pipeJavaLib.groovy")
