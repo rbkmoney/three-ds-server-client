@@ -32,7 +32,6 @@
     </scm>
 
     <properties>
-        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
         <spring.version>5.2.9.RELEASE</spring.version>
@@ -175,18 +174,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <target>11</target>
-                    <source>11</source>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
